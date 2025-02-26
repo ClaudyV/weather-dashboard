@@ -1,18 +1,21 @@
 import axios from "axios";
 
-const GEOCODING_API_URL = "https://geocoding-api.open-meteo.com/v1/search";
-const WEATHER_API_URL = "https://api.open-meteo.com/v1/forecast";
+const GEOCODING_API_PATH = "/v1/search";
+const WEATHER_API_PATH = "/v1/forecast";
 
 export const searchCity = async (cityName: string) => {
   try {
-    const response = await axios.get(GEOCODING_API_URL, {
-      params: {
-        name: cityName,
-        count: 1,
-        language: "en",
-        format: "json",
-      },
-    });
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_GEOCODING_API_URL + GEOCODING_API_PATH,
+      {
+        params: {
+          name: cityName,
+          count: 1,
+          language: "en",
+          format: "json",
+        },
+      }
+    );
 
     if (response.data.results && response.data.results.length > 0) {
       return response.data.results[0];
@@ -26,17 +29,20 @@ export const searchCity = async (cityName: string) => {
 
 export const getWeatherData = async (latitude: number, longitude: number) => {
   try {
-    const response = await axios.get(WEATHER_API_URL, {
-      params: {
-        latitude,
-        longitude,
-        current:
-          "temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m",
-        daily: "weather_code,temperature_2m_max,temperature_2m_min",
-        timezone: "auto",
-        forecast_days: 7,
-      },
-    });
+    const response = await axios.get(
+      process.env.NEXT_PUBLIC_WEATHER_API_URL + WEATHER_API_PATH,
+      {
+        params: {
+          latitude,
+          longitude,
+          current:
+            "temperature_2m,relative_humidity_2m,weather_code,wind_speed_10m",
+          daily: "weather_code,temperature_2m_max,temperature_2m_min",
+          timezone: "auto",
+          forecast_days: 7,
+        },
+      }
+    );
 
     return response.data;
   } catch (error) {
