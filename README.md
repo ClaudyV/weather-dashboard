@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-A modern, responsive weather dashboard application built with Next.js, Tailwind CSS and Open-Meteo. This application allows users to search for weather information by city, view current conditions, and check the 5-day forecast.
+A modern, responsive weather dashboard application built with Next.js, Tailwind CSS, TanStack Query and Open-Meteo. This application allows users to search for weather information by city, view current conditions, and check the 5-day forecast.
 
 ## Features
 
@@ -58,12 +58,18 @@ Run the test suite with:
 npm test
 ```
 
+## Deployment
+
+The application is deployed and can be accessed at [https://weather-dashboard-three-gray.vercel.app/](https://weather-dashboard-three-gray.vercel.app/).
+
 ## License
 
 MIT License
 
 ## Acknowledgements
 
+- [Next.js](https://nextjs.org/) for building React application
+- [TanStack Query](https://tanstack.com/query/latest) for data fetching and state management
+- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
 - [Open-Meteo](https://open-meteo.com/) for the free weather API
 - [React Icons](https://react-icons.github.io/react-icons/) for the icon sets
-- [Tailwind CSS](https://tailwindcss.com/) for the styling framework
