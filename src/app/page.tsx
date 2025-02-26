@@ -1,15 +1,19 @@
 "use client";
 
+import { CityDataT } from "@/lib/type";
 import CurrentWeather from "@/components/CurrentWeather";
+import Favorites from "@/components/Favorites";
 import Forecast from "@/components/Forecast";
 import LoadingUi from "@/components/ui/Loading";
 import SearchBar from "@/components/SearchBar";
+import { useEffect } from "react";
 import { useState } from "react";
 import useWeather from "@/hooks/useWeather";
 
 export default function Home() {
   const [city, setCity] = useState<string>("");
   const [unit, setUnit] = useState("celsius");
+  const [favorites, setFavorites] = useState<CityDataT[]>([]);
 
   const { useGetWeatherByCity, useGetWeatherByCoordinates } = useWeather();
   const { data: cityData, isFetching: fetchingCity } =
@@ -26,6 +30,19 @@ export default function Home() {
   const toggleUnit = () => {
     setUnit((prev) => (prev === "celsius" ? "fahrenheit" : "celsius"));
   };
+
+  // Load favorites from localStorage on component mount
+  useEffect(() => {
+    const storedFavorites = localStorage.getItem("favoriteWeatherCities");
+    if (storedFavorites) {
+      setFavorites(JSON.parse(storedFavorites));
+    }
+  }, []);
+
+  // Save favorites to localStorage whenever it changes
+  useEffect(() => {
+    localStorage.setItem("favoriteWeatherCities", JSON.stringify(favorites));
+  }, [favorites]);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-sky-100 to-blue-200 p-4 sm:p-6">
@@ -47,36 +64,53 @@ export default function Home() {
           </div>
         )}
 
-        {isFetching && !weatherData && (
+        {isFetching ? (
           <div className="flex justify-center my-10 text-gray-500">
             <LoadingUi />
           </div>
-        )}
-
-        {weatherData && cityData && city && (
-          <div className="mt-8 grid gap-6">
-            <div className="flex justify-center mb-2">
-              <button
-                onClick={toggleUnit}
-                className="text-sm px-3 py-1 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow text-gray-500"
-              >
-                Switch to {unit === "celsius" ? "°F" : "°C"}
-              </button>
-            </div>
-
-            <CurrentWeather
-              weatherData={weatherData}
-              city={cityData}
-              unit={unit}
-            />
-
-            <Forecast forecast={weatherData.daily} unit={unit} />
+        ) : city === "" ? (
+          <div className="flex justify-center my-10 text-gray-500 font-bold">
+            <p>Search for a city to get started</p>
           </div>
-        )}
+        ) : !cityData ? (
+          <div className="flex justify-center my-10 text-gray-500 font-bold">
+            <p>No city found :(</p>
+          </div>
+        ) : (
+          <>
+            <Favorites
+              favorites={favorites}
+              setFavorites={setFavorites}
+              currentCity={cityData}
+              onSelectCity={(city: string) => setCity(city)}
+            />
+            {weatherData && (
+              <>
+                <hr className="border-t border-gray-500" />
+                <div className="mt-8 grid gap-6">
+                  <div className="flex justify-center mb-2">
+                    <button
+                      onClick={toggleUnit}
+                      className="text-sm px-3 py-1 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow text-gray-500"
+                    >
+                      Switch to {unit === "celsius" ? "°F" : "°C"}
+                    </button>
+                  </div>
 
-        <footer className="mt-12 text-center text-gray-500 text-sm">
-          <p>Data provided by Open-Meteo API</p>
-        </footer>
+                  <CurrentWeather
+                    weatherData={weatherData}
+                    city={cityData}
+                    unit={unit}
+                  />
+                  <Forecast forecast={weatherData.daily} unit={unit} />
+                </div>
+                <footer className="mt-8 text-center text-gray-500 text-sm">
+                  <p>Data provided by Open-Meteo API</p>
+                </footer>
+              </>
+            )}
+          </>
+        )}
       </div>
     </div>
   );

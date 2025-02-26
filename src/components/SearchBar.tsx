@@ -2,7 +2,7 @@ import { FaSearch } from "react-icons/fa";
 import { useState } from "react";
 
 interface SearchBarProps {
-  onSearch: (searchItem: string) => void;
+  onSearch: (city: string) => void;
 }
 
 const SearchBar = ({ onSearch }: SearchBarProps) => {
@@ -13,6 +13,7 @@ const SearchBar = ({ onSearch }: SearchBarProps) => {
     if (query.trim()) {
       onSearch(query.trim());
     }
+    setQuery("");
   };
 
   return (
