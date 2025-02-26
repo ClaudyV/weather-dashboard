@@ -77,7 +77,7 @@ export default function Home() {
             <p>No city found :(</p>
           </div>
         ) : (
-          <>
+          <div className="py-4">
             <Favorites
               favorites={favorites}
               setFavorites={setFavorites}
@@ -109,7 +109,7 @@ export default function Home() {
                 </footer>
               </>
             )}
-          </>
+          </div>
         )}
       </div>
     </div>
