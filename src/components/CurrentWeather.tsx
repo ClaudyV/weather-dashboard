@@ -35,10 +35,14 @@ const CurrentWeather = ({ weatherData, city, unit }: CurrentWeatherProps) => {
   const renderIcon = () => {
     switch (weatherInfo.icon) {
       case "sunny":
-        return <WiDaySunny className="text-6xl text-weather-sunny text-gray-500" />;
+        return (
+          <WiDaySunny className="text-6xl text-weather-sunny text-gray-500" />
+        );
       case "partly-cloudy":
       case "cloudy":
-        return <WiCloudy className="text-6xl text-weather-cloudy text-gray-500" />;
+        return (
+          <WiCloudy className="text-6xl text-weather-cloudy text-gray-500" />
+        );
       case "rainy":
         return <WiRain className="text-6xl text-weather-rainy text-gray-500" />;
       case "snowy":
@@ -46,7 +50,9 @@ const CurrentWeather = ({ weatherData, city, unit }: CurrentWeatherProps) => {
       case "foggy":
         return <WiFog className="text-6xl text-weather-cloudy text-gray-500" />;
       case "thunderstorm":
-        return <WiThunderstorm className="text-6xl text-weather-rainy text-gray-500" />;
+        return (
+          <WiThunderstorm className="text-6xl text-weather-rainy text-gray-500" />
+        );
       default:
         return <WiDaySunny className="text-6xl text-weather-sunny" />;
     }
@@ -55,7 +61,7 @@ const CurrentWeather = ({ weatherData, city, unit }: CurrentWeatherProps) => {
   return (
     <div className="card p-6 md:p-8 animate-fadeIn transition-all duration-300">
       <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-        <div>
+        <div className="flex flex-col items-center md:items-start">
           <h2 className="text-2xl font-semibold mb-1 text-gray-500">
             {city.name}, {city.country}
           </h2>
@@ -82,8 +88,8 @@ const CurrentWeather = ({ weatherData, city, unit }: CurrentWeatherProps) => {
           </div>
         </div>
 
-        <div className="flex flex-col justify-center">
-          <h3 className="text-lg font-medium mb-3 text-gray-500">Details</h3>
+        <div className="flex flex-col justify-center items-center md:items-start">
+          <h3 className="text-lg font-bold mb-3 text-gray-500">Details</h3>
 
           <div className="grid grid-cols-1 gap-3">
             <div className="flex items-center">
@@ -101,7 +107,9 @@ const CurrentWeather = ({ weatherData, city, unit }: CurrentWeatherProps) => {
               <FaWind className="text-xl text-primary mr-3 text-gray-500" />
               <div>
                 <p className="text-sm text-gray-500">Wind Speed</p>
-                <p className="font-medium text-gray-500">{current.wind_speed_10m} km/h</p>
+                <p className="font-medium text-gray-500">
+                  {current.wind_speed_10m} km/h
+                </p>
               </div>
             </div>
 
@@ -109,7 +117,9 @@ const CurrentWeather = ({ weatherData, city, unit }: CurrentWeatherProps) => {
               <FaTint className="text-xl text-primary mr-3 text-gray-500" />
               <div>
                 <p className="text-sm text-gray-500">Humidity</p>
-                <p className="font-medium text-gray-500">{current.relative_humidity_2m}%</p>
+                <p className="font-medium text-gray-500">
+                  {current.relative_humidity_2m}%
+                </p>
               </div>
             </div>
           </div>

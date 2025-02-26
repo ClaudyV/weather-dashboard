@@ -54,7 +54,9 @@ const Forecast = ({ forecast, unit }: ForecastProps) => {
 
   return (
     <div className="card p-6">
-      <h2 className="text-xl font-semibold mb-4 text-gray-500">5-Day Forecast</h2>
+      <h2 className="text-xl font-semibold mb-4 text-gray-500 text-center md:text-start">
+        5-Day Forecast
+      </h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-6">
         {forecastDays.map((day, index) => {
@@ -72,7 +74,10 @@ const Forecast = ({ forecast, unit }: ForecastProps) => {
           );
 
           return (
-            <div key={day}>
+            <div
+              key={day}
+              className="flex flex-col items-center md:items-start"
+            >
               <p className="font-bold mb-2 text-gray-500">{formattedDay}</p>
               <div className="my-2 text-gray-500">
                 {getWeatherIcon(weatherCode)}

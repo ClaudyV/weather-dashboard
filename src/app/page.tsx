@@ -55,7 +55,7 @@ export default function Home() {
 
         {weatherData && cityData && city && (
           <div className="mt-8 grid gap-6">
-            <div className="flex justify-end mb-2">
+            <div className="flex justify-center mb-2">
               <button
                 onClick={toggleUnit}
                 className="text-sm px-3 py-1 bg-white rounded-full shadow-sm hover:shadow-md transition-shadow text-gray-500"
