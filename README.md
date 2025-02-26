@@ -1,6 +1,6 @@
 # Weather Dashboard
 
-A modern, responsive weather dashboard application built with React and Tailwind CSS. This application allows users to search for weather information by city, view current conditions, and check the 5-day forecast.
+A modern, responsive weather dashboard application built with Next.js, Tailwind CSS and Open-Meteo. This application allows users to search for weather information by city, view current conditions, and check the 5-day forecast.
 
 ## Features
 
@@ -26,17 +26,20 @@ A modern, responsive weather dashboard application built with React and Tailwind
 ## Installation and Setup
 
 1. Clone the repository:
+
    ```
    git clone https://github.com/ClaudyV/weather-dashboard.git
    cd weather-dashboard
    ```
 
 2. Install dependencies:
+
    ```
    npm install
    ```
 
 3. Start the development server:
+
    ```
    npm start
    ```
@@ -50,6 +53,7 @@ This project uses the [Open-Meteo API](https://open-meteo.com/), which is a free
 ## Testing
 
 Run the test suite with:
+
 ```
 npm test
 ```
