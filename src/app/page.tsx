@@ -1,6 +1,7 @@
 "use client";
 
 import CurrentWeather from "@/components/CurrentWeather";
+import Forecast from "@/components/Forecast";
 import LoadingUi from "@/components/ui/Loading";
 import SearchBar from "@/components/SearchBar";
 import { useState } from "react";
@@ -68,6 +69,8 @@ export default function Home() {
               city={cityData}
               unit={unit}
             />
+
+            <Forecast forecast={weatherData.daily} unit={unit} />
           </div>
         )}
 
