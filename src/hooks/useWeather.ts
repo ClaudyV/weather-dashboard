@@ -1,4 +1,5 @@
-import { searchCity } from "@/services/weatherService";
+import { getWeatherData, searchCity } from "@/services/weatherService";
+
 import { useQuery } from "@tanstack/react-query";
 
 const useWeather = () => {
@@ -8,7 +9,15 @@ const useWeather = () => {
       queryFn: () => searchCity(cityName),
       enabled: !!cityName,
     });
-  return { useGetWeatherByCity };
+
+  const useGetWeatherByCoordinates = (latitude: number, longitude: number) =>
+    useQuery({
+      queryKey: ["weatherByCoordinates", latitude, longitude],
+      queryFn: () => getWeatherData(latitude, longitude),
+      enabled: !!latitude && !!longitude,
+    });
+
+  return { useGetWeatherByCity, useGetWeatherByCoordinates };
 };
 
 export default useWeather;
