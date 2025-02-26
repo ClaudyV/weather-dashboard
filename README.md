@@ -18,6 +18,7 @@ A modern, responsive weather dashboard application built with Next.js, Tailwind 
 ## Technologies Used
 
 - Next.js
+- TanStack Query
 - Tailwind CSS for styling
 - Axios for API requests
 - React Icons for weather icons
